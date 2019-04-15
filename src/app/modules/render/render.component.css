@@ -1,0 +1,67 @@
+.form-wrapper {
+    padding: 10px;
+    padding-right: 0;
+}
+
+.buttons-row {
+    text-align: center;
+}
+
+.input-file input[type=file] {
+    display: none;
+}
+
+.input-file {
+    background: red;
+}
+
+.input-image {
+    min-width: 180px;
+    max-width: 180px;
+}
+
+.input-image button {
+    width: 180px;
+}
+
+.primary {
+    color: #3f51b5;
+    margin: 10px;
+}
+
+.danger {
+    color: #dc3545;
+    margin: 10px;
+}
+
+.success {
+    color: #4CAF50;
+    margin: 10px;
+}
+
+.sections-wrapper {
+    overflow-y: auto;
+}
+
+.mat-expansion-panel-header.ng-trigger.ng-trigger-expansionHeight.mat-expanded {
+    height: 30px !important;
+    font-weight: bold;
+}
+
+.mat-expansion-panel-header-title {
+    font-style: italic;
+}
+
+.each-section {
+    border: 1px dashed gray;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.section-metrics td {
+    text-align: center;
+}
+
+.quantTable{
+    width: 100%
+}

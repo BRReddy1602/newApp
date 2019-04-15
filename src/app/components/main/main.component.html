@@ -1,0 +1,39 @@
+<div *ngIf="user">
+	<div class="sidenav-wrapper">
+		<div class="sidenav-header">
+			<mat-toolbar color="primary">
+				<table class="left-text">
+					<tr>
+						<td>
+							<div class="school-name">Art</div>
+						</td>
+					</tr>
+				</table>
+				<table class="right-text">
+					<tr>
+						<td class="text-right">
+							<!-- <button mat-raised-button *ngIf="user.selectedRole !== 'Admin'" (click)="editProfile()">{{user.selectedRole}}</button>
+							<button mat-icon-button (click)="mail()" title="Mail">
+								<mat-icon>email</mat-icon>
+							</button>
+							<button mat-icon-button (click)="logOut()" title="Logout">
+								<mat-icon>power_settings_new</mat-icon>
+							</button> -->
+						</td>
+					</tr>
+				</table>
+			</mat-toolbar>
+		</div>
+		<div class="sidenav-body" *ngIf="user.selectedRole === 'Art'">
+			<create *ngIf="selectedApp.id === 1"></create>
+			<render *ngIf="selectedApp.id === 2"></render>
+			<refine-grid *ngIf="selectedApp.id === 3" [refineData]="dataService.render"></refine-grid>
+			</div>
+		<div class="sidenav-footer">
+			
+		</div>
+	</div>
+	<div class="nav-list">
+		<applications-list (onselect)="onAppSelect($event)" [applications]="appList"></applications-list>
+	</div>
+</div>

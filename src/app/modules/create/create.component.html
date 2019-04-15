@@ -1,0 +1,94 @@
+<div class="container students-view">
+  <span class="selected-app-name">{{user.selectedApp.name}}</span>
+  <span class="row go-icon" *ngIf="frontVisible">
+    <span (click)="save()">
+      <button mat-raised-button color="primary">
+        <mat-icon>save</mat-icon>Save
+      </button>
+    </span>
+  </span>
+  <div class="card" [style.width.px]="data.width" [style.height.px]="data.height">
+    <div class="front" *ngIf="frontVisible">
+      <!-- <h1>Render Works</h1> -->
+      <div class="form-wrapper">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Grid Code" [(ngModel)]='newRecord.gridCode' />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Grid Name" [(ngModel)]='newRecord.gridName' />
+          </mat-form-field>
+          <button color="default" mat-raised-button (click)="checkSections(section)">
+            Submit
+          </button>
+        </div>
+
+        <h3 *ngIf="newRecord.gridCode && newRecord.gridName && showSections">
+          <b>Sections</b>
+          <button color="primary" mat-button (click)="addSection(section)">
+            <mat-icon>add_circle</mat-icon>
+          </button>
+        </h3>
+        <div class="sections-wrapper" [style.maxHeight.px]="data.height-118" [style.height.px]="data.height - 118">
+          <div *ngFor="let section of newRecord.sections ">
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <span *ngIf="!section.sectionName">Section &nbsp;</span> {{section.sectionName}}
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    {{section.label}}
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-form-field>
+                  <mat-select placeholder="Section Type " [(ngModel)]='section.sectionType' [(value)]='section.sectionType'>
+                    <mat-option *ngFor="let value of sectionTypes" [value]="value.id ">
+                      {{ value.name || value.id}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="Section Name " [(ngModel)]='section.sectionName' />
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="Description " [(ngModel)]='section.label' />
+                </mat-form-field>
+
+                <mat-icon (click)="deleteSection(section) " class="cursor-pointer danger " title="Delete Section ">delete</mat-icon>
+                <span *ngIf="section.fields.length && (section.sectionType === 'quant' || section.sectionType === 'qual')">
+                  <h4>
+                    <b>Metrics</b>
+                  </h4>
+                  <div *ngFor="let field of section.fields;let i = index">
+                    <mat-form-field *ngIf="section.sectionType === 'quant'">
+                      <mat-select placeholder="Metric Type " [(ngModel)]='field.elementType' [(value)]='field.elementType'>
+                        <mat-option *ngFor="let value of elementTypes" [value]="value.id ">
+                          {{ value.name || value.id}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="section.sectionType === 'qual'">
+                      <input matInput placeholder="Qualtative Section"
+                        disabled />
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput placeholder="Description" [(ngModel)]='field.label' />
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput placeholder="Property Name" [(ngModel)]='field.propertyName' />
+                    </mat-form-field>
+                    <mat-icon (click)="moreDetails(section,field) " class="cursor-pointer primary " title="More Details ">info</mat-icon>
+                    <mat-icon (click)="deleteMetric(section,metric)" class="cursor-pointer danger " title="Delete Metric ">delete</mat-icon>
+                    <mat-icon *ngIf="i === section.fields.length-1" (click)="addMetrics(section)" class="cursor-pointer success "
+                      title="Add Metric ">add_circle</mat-icon>
+                  </div>
+                </span>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

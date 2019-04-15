@@ -1,0 +1,69 @@
+.popup-header {
+    min-width: 50vw; 
+    /* // min-height: 5vw; */
+    font-size: 20px;
+    padding-top: 10px;
+    padding-left: 25px;
+    color: #fff;
+    background: #ccc;
+    font-weight: bolder;
+}
+
+.validations {
+    height: 400px !important;
+    max-height: 400px !important;
+    overflow-y: auto !important;
+    font-size: 14px;
+}
+
+.validations .mat-form-field {
+    margin: 0 !important;
+}
+
+.values .mat-form-field {
+    margin: 10px;
+}
+
+.validations .mat-select {
+    margin: 10px;
+    border-bottom: 1px solid gray;
+}
+
+.quantTable .form-control{
+    width: 50% !important;
+    display: inherit !important;
+}
+
+span.danger {
+    margin-left: 450px;
+    margin-top: 5px;
+}
+
+.primary {
+    color: #3f51b5;
+    margin: 10px;
+}
+
+.danger {
+    color: #dc3545;
+    margin: 10px;
+}
+
+.success {
+    color: #4CAF50;
+    margin: 10px;
+}
+
+.quantTable {
+    border: 1px solid gray;
+    width: 100%;
+}
+
+.form-control {
+    font-size: 14px;
+}
+
+.pull-right {
+    float: right;
+    margin-left: 10px;
+}

@@ -1,0 +1,83 @@
+<div class="container students-view">
+  <span class="selected-app-name">Render</span>
+  <span class="row go-icon">
+    <span (click)="save()">
+      <button mat-raised-button color="primary">
+        <mat-icon>save</mat-icon>Save
+      </button>
+    </span>
+  </span>
+  <div class="card render" [style.width.px]="data.width" [style.height.px]="data.height">
+    <div class="front">
+      <div class="form-wrapper" [style.width.px]="data.width" [style.height.px]="data.height">
+        <h3>
+          <b>Grid Code: </b> {{renderObject.gridCode}}</h3>
+        <h3>
+          <b>Grid Name: </b> {{renderObject.gridName}}</h3>
+
+        <h3 *ngIf="renderObject.sections.length">
+          <b>Sections</b>
+        </h3>
+        <div class="sections-wrapper" [style.maxHeight.px]="data.height-118" [style.height.px]="data.height - 118">
+          <div *ngFor="let section of renderObject.sections " class="each-section">
+            <h4>
+              <b>{{section.sectionName}}</b> {{section.label}}
+            </h4>
+            <h4 *ngIf="section.fields.length ">
+              <b>Metrics</b>
+            </h4>
+            <table style="width:90%" border=1 class="section-metrics">
+              <tr *ngFor="let field of section.fields;let i = index">
+                <td>
+                <b [ngStyle]="field.style">{{field.label}}</b>
+                </td>
+                <td *ngIf="field.elementType===1">
+                  <input matInput placeholder="" [(ngModel)]='saveObject[section.sectionId][field.propertyName]'
+                    [ngModelOptions]="{standalone: true}" />
+                </td>
+                <td *ngIf="field.elementType===2">
+                  <mat-radio-group [(ngModel)]='saveObject[section.sectionId][field.propertyName]'>
+                    <mat-radio-button *ngFor="let value of field.values" value="{{value.id}}">{{value.label}}</mat-radio-button>
+                  </mat-radio-group>
+                </td>
+                <td *ngIf="field.elementType===3">
+                  <mat-checkbox *ngFor="let value of field.values;let x = index" [(ngModel)]="saveObject[section.sectionId][field.propertyName][x]"
+                    (change)="checkboxChange(field,value)">{{value.label}}</mat-checkbox>
+                </td>
+                <td *ngIf="field.elementType===4">
+                  <mat-form-field>
+                    <mat-select [(ngModel)]="saveObject[section.sectionId][field.propertyName]" [ngModelOptions]="{standalone: true}">
+                      <mat-option *ngFor="let value of field.values" [value]="value.id">
+                        {{value.label}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </td>
+                <td *ngIf="field.elementType===5">
+                  <table class="quantTable" border="1">
+                    <tr>
+                      <td></td>
+                      <td *ngFor="let rating of field.values">
+                        <b>{{rating.label}}</b>
+                      </td>
+                    </tr>
+                    <tr *ngFor="let row of field.rows">
+                      <td>
+                        <b>{{row.label}}</b>
+                      </td>
+                      <td *ngFor="let x of field.values; let k = index" >
+                        <input style="margin-left: 40%;" type="radio" [(ngModel)]='saveObject[section.sectionId][field.propertyName][row.id]'
+                          name="{{row.label + row.id}}" [value]='x.id' (click)='radioChange(row,x,section,field,$event)' id="{{row.label + field.propertyName + x.id}}"
+                          disabled="{{!field.qualtative[row.id][k]}}" [ngModelOptions]="{standalone: true}" [checked]="saveObject[section.sectionId][field.propertyName][row.id]===x.id ? true : false">
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

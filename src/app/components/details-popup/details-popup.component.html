@@ -1,0 +1,208 @@
+<form class="popup-form">
+  <div class="row popup-header">
+    <span>More Details</span>
+    <!-- <span class="danger cursor-pointer">
+      <mat-icon (click)="closePopup()">close</mat-icon>
+    </span> -->
+
+  </div>
+  <!-- <pre>{{data.field|json}}</pre> -->
+  <mat-tab-group style="height:500px">
+    <mat-tab label="Validations" *ngIf="data.field.elementType!== 5">
+      <div class="validations">
+        <table>
+          <tr>
+            <td>
+              <b>
+                Max Length
+              </b>
+            </td>
+            <td>
+              <mat-form-field>
+                <input matInput placeholder="" [(ngModel)]='data.field.validation.maxLength' [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>
+                Starts With
+              </b>
+            </td>
+            <td>
+              <mat-form-field>
+                <input matInput placeholder="" [(ngModel)]='data.field.validation.startsWith' [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>
+                Ends With
+              </b>
+            </td>
+            <td>
+              <mat-form-field>
+                <input matInput placeholder="" [(ngModel)]='data.field.validation.endsWith' [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>
+                Min Length
+              </b>
+            </td>
+            <td>
+              <mat-form-field>
+                <input matInput placeholder="" [(ngModel)]='data.field.validation.minLength' [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>
+                Allowed Special Chars
+              </b>
+            </td>
+            <td>
+              <mat-select [(ngModel)]='data.field.validation.allowedSpecialChars' [(value)]='data.field.validation.allowedSpecialChars'
+                [ngModelOptions]="{standalone: true}">
+                <mat-option [value]="">Select</mat-option>
+                <mat-option [value]="true">True</mat-option>
+                <mat-option [value]="false">False</mat-option>
+              </mat-select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>
+                Allowed Chars
+              </b>
+            </td>
+            <td>
+              <mat-select [(ngModel)]='data.field.validation.allowedChars' [(value)]='data.field.validation.allowedChars' [ngModelOptions]="{standalone: true}">
+                <mat-option [value]="">Select</mat-option>
+                <mat-option [value]="numeric">Numeric</mat-option>
+                <mat-option [value]="alphaNumeric">Alpha Numeric</mat-option>
+              </mat-select>
+            </td>
+          </tr>
+        </table>
+
+      </div>
+    </mat-tab>
+    <mat-tab label="Styles">
+      <div class="validations">
+        <table>
+          <tr>
+            <td>
+              <b>
+                Font Weight
+              </b>
+            </td>
+            <td>
+              <mat-select [(ngModel)]='data.field.style.fontWeight' [(value)]='data.field.style.fontWeight' [ngModelOptions]="{standalone: true}">
+                <mat-option value="normal">Normal</mat-option>
+                <mat-option value="bold">Bold</mat-option>
+                <mat-option value="bolder">Bolder</mat-option>
+                <mat-option value="lighter">Lighter</mat-option>
+                <mat-option value="100">100</mat-option>
+                <mat-option value="200">200</mat-option>
+                <mat-option value="300">300</mat-option>
+                <mat-option value="400">400</mat-option>
+                <mat-option value="500">500</mat-option>
+                <mat-option value="600">600</mat-option>
+                <mat-option value="700">700</mat-option>
+                <mat-option value="800">800</mat-option>
+                <mat-option value="900">900</mat-option>
+              </mat-select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>
+                Font Family
+              </b>
+            </td>
+            <td>
+              <mat-select [(ngModel)]='data.field.style.fontFamily' [(value)]='data.field.style.fontFamily' [ngModelOptions]="{standalone: true}">
+                <mat-option value="Georgia">Georgia</mat-option>
+                <mat-option value="Book Antiqua">Book Antiqua</mat-option>
+                <mat-option value="Palatino Linotype">Palatino Linotype</mat-option>
+                <mat-option value="Times New Roman">Times New Roman</mat-option>
+                <mat-option value="Arial">Arial</mat-option>
+                <mat-option value="Helvetica">Helvetica</mat-option>
+                <mat-option value="Arial Black">Arial Black</mat-option>
+                <mat-option value="Impact">Impact</mat-option>
+                <mat-option value="Lucida Sans Unicode">Lucida Sans Unicode</mat-option>
+                <mat-option value="Tahoma">Tahoma</mat-option>
+                <mat-option value="Verdana">Verdana</mat-option>
+                <mat-option value="Courier New">Courier New</mat-option>
+                <mat-option value="Lucida Console">Lucida Console</mat-option>
+              </mat-select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b>
+                Font Size
+              </b>
+            </td>
+            <td>
+              <mat-form-field>
+                <input matInput placeholder="" [(ngModel)]='data.field.style.fontSize' [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </mat-tab>
+    <mat-tab label="Values" *ngIf="data.field.elementType=== 2 || data.field.elementType=== 3 || data.field.elementType=== 4">
+      <div class="values validations">
+        <div *ngFor="let value of data.field.values;let i = index">
+          <mat-form-field>
+            <input matInput placeholder="Enter Id" [(ngModel)]='value.id' [ngModelOptions]="{standalone: true}" />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Description " [(ngModel)]='value.label' [ngModelOptions]="{standalone: true}" />
+          </mat-form-field>
+          <mat-icon *ngIf="i === data.field.values.length-1" (click)="addValue() " class="cursor-pointer primary " title="Add Value ">add_circle</mat-icon>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Qualitative" *ngIf="data.field.elementType=== 5">
+      <div class="validations">
+        <mat-form-field>
+          <input matInput placeholder="Enter No. Of Rows" [(ngModel)]='rows' [ngModelOptions]="{standalone: true}" />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Enter No.Of Columns" [(ngModel)]='columns' [ngModelOptions]="{standalone: true}" />
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="showQuantTable()">Ok</button>
+        <div *ngIf="showQuant">
+          <table class="quantTable" border="1">
+            <tr>
+              <td></td>
+              <td *ngFor="let rating of data.field.values">
+                <input type="text" class="form-control" [(ngModel)]='rating.label' placeholder='Enter Label' [ngModelOptions]="{standalone: true}" />
+                <!-- <input type="text" class="form-control" [(ngModel)]='rating.id' placeholder='Enter Id' [ngModelOptions]="{standalone: true}" /> -->
+              </td>
+            </tr>
+            <tr *ngFor="let row of data.field.rows">
+              <td>
+                <input type="text" class="form-control" [(ngModel)]='row.label' placeholder="Enter Label" [ngModelOptions]="{standalone: true}" />
+                <input type="text" class="form-control" [(ngModel)]='row.id' placeholder="Enter Id" [ngModelOptions]="{standalone: true}" />
+              </td>
+              <td *ngFor="let x of columnsTemp; let x = index">
+                <mat-checkbox style="margin-left: 40%;" class="example-margin" [(ngModel)]="data.field.qualtative[row.id][x]" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <button mat-raised-button color="primary" class="pull-right" (click)="closePopup(true,data.field)">Ok</button>
+
+</form>
